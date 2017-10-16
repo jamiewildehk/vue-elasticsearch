@@ -4,7 +4,7 @@
     <img src="../assets/it2g.png" alt="miro" class="miroImg">
     <h1>Add Visual Search to Your App or Project in <u>Minutes</u></h1>
 
-    <vue-elastic-search-box>
+    <vue-elastic-search-box @selected="onOptionSelect">
       <template slot="item" slot-scope="option">
         <article class="media">
           <figure class="media-left">
@@ -30,6 +30,11 @@ export default {
   data () {
     return {
       msg: 'Main View'
+    }
+  },
+  methods: {
+    onOptionSelect (option) {
+      console.log('option selected', option)
     }
   }
 }
