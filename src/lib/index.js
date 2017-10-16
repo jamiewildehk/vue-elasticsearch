@@ -1,18 +1,18 @@
 import 'bulma'
 import 'font-awesome/css/font-awesome.css'
 
+import VueElasticStore from './store'
 import VueElasticSearchBox from './components/VueElasticSearchBox.vue'
 
 // Install the components
-export function install (Vue) {
+export function install (Vue, options) {
   Vue.component('vueElasticSearchBox', VueElasticSearchBox)
-  /* -- Add more components here -- */
 }
 
-// Expose the components
+// Expose the store and components
 export {
+  VueElasticStore,
   VueElasticSearchBox
-  /* -- Add more components here -- */
 }
 
 /* -- Plugin definition & Auto-install -- */
