@@ -1,3 +1,6 @@
+import 'bulma'
+import 'font-awesome/css/font-awesome.css'
+
 import VueElasticSearchBox from './components/VueElasticSearchBox.vue'
 
 // Install the components

@@ -1,12 +1,14 @@
 <template>
   <div class="ve-search-box">
     <div class="autocomplete-input">
-      <p class="control has-icon has-icon-right">
+      <p class="control has-icons-right">
         <input
           class="input is-large"
           placeholder="Search..."
         >
-        <i class="fa fa-angle-down"></i>
+        <span class="icon is-large is-right">
+          <i class="fa fa-search"></i>
+        </span>
       </p>
       <ul class="options-list">
         <li v-for="option in options" :key="option.title">
