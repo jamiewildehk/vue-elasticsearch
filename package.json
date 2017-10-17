@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "bulma": "^0.6.0",
+    "elasticsearch": "^13.3.1",
     "font-awesome": "^4.7.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
