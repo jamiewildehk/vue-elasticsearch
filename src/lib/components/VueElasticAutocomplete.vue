@@ -1,8 +1,8 @@
 <template>
   <div class="autocomplete-input">
-    <p class="control has-icons-right">
+    <p class="">
       <input
-        class="input is-large"
+        class=""
         placeholder="Search..."
         v-model="keyword"
         @input="debouncedInput"
@@ -12,7 +12,7 @@
         @keydown.up="moveUp"
         @keydown.enter="select"
       >
-      <span class="icon is-large is-right">
+      <span class="">
         <i class="fa fa-search"></i>
       </span>
     </p>
