@@ -1,4 +1,3 @@
-import 'bulma'
 import 'font-awesome/css/font-awesome.css'
 
 import { SuggestManager, SearchManager } from './api'
