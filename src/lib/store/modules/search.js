@@ -1,4 +1,5 @@
 import * as types from '../mutation-types'
+import { SearchManager } from '../../api'
 
 // initial state
 const state = {
@@ -40,7 +41,20 @@ const mutations = {
 }
 
 // actions
-const actions = {}
+const actions = {
+  fetchHits ({ commit, state }, keyword) {
+    commit(types.UPDATE_KEYWORD, { keyword })
+    commit(types.SEARCH_REQUEST)
+
+    SearchManager.search(keyword)
+      .then(hits => {
+        commit(types.SEARCH_SUCCESS, { hits })
+      })
+      .catch(error => {
+        commit(types.SEARCH_FAILURE, { error })
+      })
+  }
+}
 
 export default {
   namespaced: true,
