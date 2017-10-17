@@ -5,7 +5,7 @@
         class="input is-large"
         placeholder="Search..."
         v-model="keyword"
-        @input="input($event.target.value)"
+        @input="debouncedInput"
         @keyup.esc="isOpen = false"
         @blur="isOpen = false"
         @keydown.down="moveDown"
@@ -17,7 +17,7 @@
       </span>
     </p>
     <ul v-show="isOpen" class="suggestions-list">
-      <li v-for="(suggestion, index) in fSuggestions"
+      <li v-for="(suggestion, index) in suggestions"
         :key="index"
         :class="{'highlighted': index === highlightedPosition}"
         @mouseenter="highlightedPosition = index"
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 export default {
   name: 'VueElasticAutocomplete',
   props: {
@@ -44,31 +46,32 @@ export default {
       highlightedPosition: 0
     }
   },
-  computed: {
-    fSuggestions () {
-      const re = new RegExp(this.keyword, 'i')
-      return this.suggestions.filter(o => o.title.match(re))
-    }
-  },
   methods: {
-    input (value) {
+    debouncedInput: _.debounce(function (e) {
+      const value = e.target.value
+
+      this.highlightedPosition = 0
       this.isOpen = !!value
-    },
+
+      if (value) {
+        this.$emit('change', value)
+      }
+    }, 1000),
     moveDown () {
       if (!this.isOpen) {
         return
       }
-      this.highlightedPosition = (this.highlightedPosition + 1) % this.fSuggestions.length
+      this.highlightedPosition = (this.highlightedPosition + 1) % this.suggestions.length
     },
     moveUp () {
       if (!this.isOpen) {
         return
       }
-      this.highlightedPosition = (this.highlightedPosition - 1 + this.fSuggestions.length) % this.fSuggestions.length
+      this.highlightedPosition = (this.highlightedPosition - 1 + this.suggestions.length) % this.suggestions.length
     },
     select () {
-      const selectedOption = this.fSuggestions[this.highlightedPosition]
-      this.keyword = selectedOption.title
+      const selectedOption = this.suggestions[this.highlightedPosition]
+      this.keyword = selectedOption.text
       this.isOpen = false
       this.$emit('selected', this.keyword)
     }

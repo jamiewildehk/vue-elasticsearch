@@ -2,26 +2,19 @@
   <div class="ve-search-box">
     <vue-elastic-autocomplete
       :suggestions="suggestions"
+      @change="change"
       @selected="selected">
       <template slot="item" slot-scope="{ suggestion }">
-        <article class="media">
-          <figure class="media-left">
-            <p class="image is-64x64">
-              <img :src="suggestion.thumbnail">
-            </p>
-          </figure>
-          <p>
-            <strong>{{ suggestion.title }}</strong>
-            <br>
-            {{ suggestion.description }}
-          </p>
-        </article>
+        {{ suggestion.text }} {{ suggestion.score }}
       </template>
     </vue-elastic-autocomplete>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
+import store from '../store'
 import VueElasticAutocomplete from './VueElasticAutocomplete'
 
 export default {
@@ -29,33 +22,14 @@ export default {
   components: {
     VueElasticAutocomplete
   },
-  data () {
-    return {
-      suggestions: [
-        {
-          title: 'First Scene',
-          description: 'lorem ipsum dolor amet.',
-          thumbnail: 'http://lorempicsum.com/nemo/200/200/1'
-        },
-        {
-          title: 'Second Scene',
-          description: 'lorem ipsum dolor amet.',
-          thumbnail: 'http://lorempicsum.com/nemo/200/200/2'
-        },
-        {
-          title: 'Third Scene',
-          description: 'lorem ipsum dolor amet.',
-          thumbnail: 'http://lorempicsum.com/nemo/200/200/3'
-        },
-        {
-          title: 'Fourth Scene',
-          description: 'lorem ipsum dolor amet.',
-          thumbnail: 'http://lorempicsum.com/nemo/200/200/4'
-        }
-      ]
-    }
-  },
+  store,
+  computed: mapGetters({
+    suggestions: 'suggest/suggestions'
+  }),
   methods: {
+    ...mapActions({
+      change: 'suggest/fetchSuggestions'
+    }),
     selected (keyword) {
       this.$emit('selected', keyword)
     }

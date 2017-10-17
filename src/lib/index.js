@@ -1,11 +1,15 @@
 import 'bulma'
 import 'font-awesome/css/font-awesome.css'
 
+import { SuggestManager, SearchManager } from './api'
 import VueElasticStore from './store'
 import VueElasticSearchBox from './components/VueElasticSearchBox.vue'
 
 // Install the components
-export function install (Vue, options) {
+export function install (Vue, { suggest, search }) {
+  SuggestManager.configure(suggest)
+  SearchManager.configure(search)
+
   Vue.component('vueElasticSearchBox', VueElasticSearchBox)
 }
 

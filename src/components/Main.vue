@@ -4,8 +4,7 @@
     <img src="../assets/it2g.png" alt="miro" class="miroImg">
     <h1>Add Visual Search to Your App or Project in <u>Minutes</u></h1>
 
-    <vue-elastic-search-box @selected="onSelect">
-    </vue-elastic-search-box>
+    <vue-elastic-search-box @selected="onSelect"></vue-elastic-search-box>
 
   </div>
 </template>
