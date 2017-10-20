@@ -8,8 +8,8 @@
         v-model="keyword"
         :class="[inputClass]"
         @input="debouncedInput"
-        @keyup.esc="isOpen = false"
-        @blur="isOpen = false"
+        @keyup.esc="isTriggered = false"
+        @blur="isTriggered = false"
         @keydown.down="moveDown"
         @keydown.up="moveUp"
         @keydown.enter="select"
@@ -55,13 +55,18 @@ export default {
   data () {
     return {
       keyword: '',
-      isOpen: false,
+      isTriggered: false,
       activeSuggestion: 0
     }
   },
-  computed: mapGetters({
-    suggestions: 'suggest/suggestions'
-  }),
+  computed: {
+    ...mapGetters({
+      suggestions: 'suggest/suggestions'
+    }),
+    isOpen () {
+      return this.isTriggered && this.suggestions.length > 0
+    }
+  },
   methods: {
     ...mapActions({
       fetchSuggestions: 'suggest/fetchSuggestions'
@@ -70,7 +75,7 @@ export default {
       const value = e.target.value
 
       this.activeSuggestion = 0
-      this.isOpen = !!value
+      this.isTriggered = !!value
 
       if (value) {
         this.fetchSuggestions(value)
@@ -91,7 +96,7 @@ export default {
     select () {
       const selectedOption = this.suggestions[this.activeSuggestion]
       this.keyword = selectedOption.text
-      this.isOpen = false
+      this.isTriggered = false
 
       this.$emit('selected', this.keyword)
     }
