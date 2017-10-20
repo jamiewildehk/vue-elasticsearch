@@ -21,6 +21,7 @@
       <template slot="suggestion" slot-scope="{ suggestion }">
         {{ suggestion.text }} {{ suggestion.score }}
       </template>
+
     </vue-elastic-autocomplete>
 
   </div>
