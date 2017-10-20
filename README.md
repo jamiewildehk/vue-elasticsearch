@@ -2,29 +2,15 @@
 
 > An Elasticsearch wrapper for vue.js
 
-## Build Setup
+## Components
 
-``` bash
-# install dependencies
-npm install
+### vue-elastic-autocomplete
 
-# serve with hot reload at localhost:8080
-npm run dev
+Autocomplete input
 
-# build for production with minification
-npm run build
+#### Attributes
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+| Attribute       | Description                                      | Type   | Required | Default                    | Accepted Values |
+|-----------------|--------------------------------------------------|--------|----------|----------------------------|-----------------|
+| inputClass      | CSS class that applies to the autocomplete input | String | false    | ve-autocomplete-input      |        -        |
+| suggestionClass | CSS class that applies to the suggestion item    | String | false    | ve-autocomplete-suggestion |        -        |
