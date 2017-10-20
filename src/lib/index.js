@@ -2,17 +2,20 @@ import 'font-awesome/css/font-awesome.css'
 
 import { SuggestManager, SearchManager } from './api'
 import VueElasticStore from './store'
+import VueElasticAutocomplete from './components/VueElasticAutocomplete.vue'
 
 // Install the components
 export function install (Vue, { suggest, search }) {
   SuggestManager.configure(suggest)
   SearchManager.configure(search)
 
+  Vue.component('vueElasticAutocomplete', VueElasticAutocomplete)
 }
 
 // Expose the store and components
 export {
   VueElasticStore,
+  VueElasticAutocomplete
 }
 
 /* -- Plugin definition & Auto-install -- */
