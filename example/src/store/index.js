@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { VueElasticStore } from '../../../dist/vue-elasticsearch.common'
+import { VueElasticStore } from 'vue-elasticsearch'
 
 Vue.use(Vuex)
 

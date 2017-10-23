@@ -2,8 +2,8 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import 'font-awesome/css/font-awesome.css'
-import VueElastic from '../../dist/vue-elasticsearch.common'
-import '../../dist/vue-elasticsearch.css'
+import VueElastic from 'vue-elasticsearch'
+import 'vue-elasticsearch/dist/vue-elasticsearch.css'
 
 import store from './store'
 import App from './App'
