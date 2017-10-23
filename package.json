@@ -1,0 +1,27 @@
+{
+  "name": "vue-elasticsearch",
+  "description": "An Elasticsearch wrapper for vue.js",
+  "version": "1.0.0",
+  "authors": [
+    "Jamie Wilde <jamie@eschr.com>",
+    "Haohong Xu <weidai1122@gmail.com>"
+  ],
+  "keywords": [
+    "vue",
+    "elasticsearch"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "unpkg": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamiewildehk/vue-elasticsearch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jamiewildehk/vue-elasticsearch/issues"
+  },
+  "homepage": "https://github.com/jamiewildehk/vue-elasticsearch#readme"
+}
