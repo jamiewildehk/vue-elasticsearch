@@ -2,9 +2,11 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import 'font-awesome/css/font-awesome.css'
+import VueElastic from '../../dist/vue-elasticsearch.common'
+import '../../dist/vue-elasticsearch.css'
 
+import store from './store'
 import App from './App'
-import VueElastic from './lib'
 import router from './router'
 
 Vue.use(VueElastic, {
@@ -25,6 +27,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   template: '<App/>',
   components: { App }

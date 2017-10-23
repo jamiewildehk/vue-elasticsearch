@@ -7,8 +7,10 @@
     <!-- Customize autocomplete input using inputClass binding, `input-box-header` and  `input-box-footer` slot templates -->
     <!-- Customize suggestion item using suggestionClass binding and `suggestion` slot template -->
     <vue-elastic-autocomplete
+      :suggestions="suggestions"
       inputClass="ve-autocomplete-input"
       suggestionClass="ve-autocomplete-suggestion"
+      @changed="onChange"
       @selected="onSelect">
 
       <template slot="input-box-header">
@@ -35,7 +37,15 @@ export default {
       msg: 'Example View'
     }
   },
+  computed: {
+    suggestions () {
+      return this.$store.getters['elastic/suggest/suggestions']
+    }
+  },
   methods: {
+    onChange (value) {
+      this.$store.dispatch('elastic/suggest/fetchSuggestions', value)
+    },
     onSelect (keyword) {
       console.log('keyword', keyword)
     }
