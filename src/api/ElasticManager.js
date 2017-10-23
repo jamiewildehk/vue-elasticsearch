@@ -1,9 +1,11 @@
 import ElasticSearch from 'elasticsearch'
 
 export class ElasticManager {
-  client = null;
-  index = '';
-  type = '';
+  constructor () {
+    this.client = null
+    this.index = ''
+    this.type = ''
+  }
 
   configure ({ host, index, type }) {
     this.client = ElasticSearch.Client({

@@ -34,22 +34,24 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import Vue from 'vue'
 import _ from 'lodash'
-
-import store from '../store'
 
 export default {
   name: 'VueElasticAutocomplete',
-  store,
+  store: Vue.vueElasticStore,
   props: {
+    suggestions: {
+      type: Array,
+      default: () => [],
+    },
     inputClass: {
-      default: 've-autocomplete-input',
       type: String,
+      default: 've-autocomplete-input',
     },
     suggestionClass: {
-      default: 've-autocomplete-suggestion',
       type: String,
+      default: 've-autocomplete-suggestion',
     },
   },
   data () {
@@ -60,17 +62,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      suggestions: 'suggest/suggestions',
-    }),
     isOpen () {
       return this.isTriggered && this.suggestions.length > 0
     },
   },
   methods: {
-    ...mapActions({
-      fetchSuggestions: 'suggest/fetchSuggestions',
-    }),
     debouncedInput: _.debounce(function (e) {
       const value = e.target.value
 
@@ -78,7 +74,7 @@ export default {
       this.isTriggered = !!value
 
       if (value) {
-        this.fetchSuggestions(value)
+        this.$emit('changed', value)
       }
     }, 1000),
     moveDown () {
