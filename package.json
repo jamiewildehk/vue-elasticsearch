@@ -1,7 +1,7 @@
 {
   "name": "vue-elasticsearch",
   "description": "An Elasticsearch wrapper for vue.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "authors": [
     {
       "name": "Haohong Xu",
