@@ -14,8 +14,6 @@ module.exports = merge(base, {
     libraryTarget: 'umd',
   },
   externals: {
-    'vue': 'vue',
-    'vuex': 'vuex',
     'elasticsearch': 'elasticsearch',
     'lodash': 'lodash',
   },

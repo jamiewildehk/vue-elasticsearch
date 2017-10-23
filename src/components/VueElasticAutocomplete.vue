@@ -34,12 +34,10 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import _ from 'lodash'
 
 export default {
   name: 'VueElasticAutocomplete',
-  store: Vue.vueElasticStore,
   props: {
     suggestions: {
       type: Array,

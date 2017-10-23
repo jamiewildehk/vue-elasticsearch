@@ -14,8 +14,6 @@ module.exports = merge(base, {
   },
   target: 'node',
   externals: {
-    'vue': 'vue',
-    'vuex': 'vuex',
     'elasticsearch': 'elasticsearch',
     'lodash': 'lodash',
   },
