@@ -25,6 +25,12 @@ module.exports = {
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report
   },
+  npm: {
+    env: require('./npm.env'),
+    assetsRoot: path.resolve(__dirname, '../dist'),
+    productionSourceMap: true,
+    bundleAnalyzerReport: process.env.npm_config_report
+  },
   dev: {
     env: require('./dev.env'),
     port: process.env.PORT || 8080,

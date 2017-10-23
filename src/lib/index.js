@@ -1,4 +1,4 @@
-import 'font-awesome/css/font-awesome.css'
+// import 'font-awesome/css/font-awesome.css'
 
 import { SuggestManager, SearchManager } from './api'
 import VueElasticStore from './store'
