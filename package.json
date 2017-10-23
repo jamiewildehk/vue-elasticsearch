@@ -4,6 +4,7 @@
   "description": "An Elasticsearch wrapper for vue.js",
   "author": "Haohong Xu <weidai1122@gmail.com>",
   "private": true,
+  "main": "dist/vue-elasticearch.min.js",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "npm run dev",
