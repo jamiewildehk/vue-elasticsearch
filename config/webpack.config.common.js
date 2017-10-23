@@ -14,9 +14,10 @@ module.exports = merge(base, {
   },
   target: 'node',
   externals: {
-    // Put external libraries like lodash here
-    // With their package name
-    // Example: 'lodash': 'lodash'
+    'vue': 'vue',
+    'vuex': 'vuex',
+    'elasticsearch': 'elasticsearch',
+    'lodash': 'lodash',
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
