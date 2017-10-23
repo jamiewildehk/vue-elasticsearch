@@ -45,31 +45,31 @@ export default {
   props: {
     inputClass: {
       default: 've-autocomplete-input',
-      type: String
+      type: String,
     },
     suggestionClass: {
       default: 've-autocomplete-suggestion',
-      type: String
-    }
+      type: String,
+    },
   },
   data () {
     return {
       keyword: '',
       isTriggered: false,
-      activeSuggestion: 0
+      activeSuggestion: 0,
     }
   },
   computed: {
     ...mapGetters({
-      suggestions: 'suggest/suggestions'
+      suggestions: 'suggest/suggestions',
     }),
     isOpen () {
       return this.isTriggered && this.suggestions.length > 0
-    }
+    },
   },
   methods: {
     ...mapActions({
-      fetchSuggestions: 'suggest/fetchSuggestions'
+      fetchSuggestions: 'suggest/fetchSuggestions',
     }),
     debouncedInput: _.debounce(function (e) {
       const value = e.target.value
@@ -99,8 +99,8 @@ export default {
       this.isTriggered = false
 
       this.$emit('selected', this.keyword)
-    }
-  }
+    },
+  },
 }
 </script>
 

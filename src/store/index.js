@@ -12,6 +12,6 @@ export default new Vuex.Store({
   getters,
   modules: {
     suggest,
-    search
-  }
+    search,
+  },
 })

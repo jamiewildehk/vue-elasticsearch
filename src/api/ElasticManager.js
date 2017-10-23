@@ -8,7 +8,7 @@ export class ElasticManager {
   configure ({ host, index, type }) {
     this.client = ElasticSearch.Client({
       host,
-      log: 'error'
+      log: 'error',
     })
     this.index = index
     this.type = type
@@ -26,10 +26,10 @@ export class ElasticManager {
           keywordSuggester: {
             prefix: query,
             completion: {
-              field: 'text'
-            }
-          }
-        }
+              field: 'text',
+            },
+          },
+        },
       })
       .then(response => (
         response
@@ -37,7 +37,7 @@ export class ElasticManager {
           .options
           .map(option => ({
             text: option.text,
-            score: option._score
+            score: option._score,
           }))
         )
       )
@@ -55,10 +55,10 @@ export class ElasticManager {
           bool: {
             must: [
               { type: { value: this.type } },
-              { term: { keywords: keyword } }
-            ]
-          }
-        }
+              { term: { keywords: keyword } },
+            ],
+          },
+        },
       })
       .then(response => response.hits.hits)
   }

@@ -1,14 +1,20 @@
-import Test from './components/Test.vue'
+import { SuggestManager, SearchManager } from './api'
+import VueElasticStore from './store'
+import VueElasticAutocomplete from './components/VueElasticAutocomplete.vue'
 
 // Install the components
-export function install (Vue) {
-  Vue.component('test', Test)
+export function install (Vue, { suggest, search }) {
+  SuggestManager.configure(suggest)
+  SearchManager.configure(search)
+
+  Vue.component('vueElasticAutocomplete', VueElasticAutocomplete)
   /* -- Add more components here -- */
 }
 
 // Expose the components
 export {
-  Test,
+  VueElasticStore,
+  VueElasticAutocomplete,
   /* -- Add more components here -- */
 }
 
