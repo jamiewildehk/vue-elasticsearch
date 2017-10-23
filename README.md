@@ -32,9 +32,9 @@ Use specific components:
 
 ```javascript
 import Vue from 'vue'
-import { Test } from 'vue-elasticsearch'
+import { VueElasticAutocomplete } from 'vue-elasticsearch'
 
-Vue.component('test', Test)
+Vue.component('vueElasticAutocomplete', VueElasticAutocomplete)
 ```
 
 **⚠️ A css file is included when importing the package. You may have to setup your bundler to embed the css in your page.**
@@ -54,9 +54,9 @@ Use specific components:
 
 ```javascript
 import 'vue-elasticsearch/dist/vue-elasticsearch.css'
-import { Test } from 'vue-elasticsearch/dist/vue-elasticsearch.common'
+import { VueElasticAutocomplete } from 'vue-elasticsearch/dist/vue-elasticsearch.common'
 
-Vue.component('test', Test)
+Vue.component('vueElasticAutocomplete', VueElasticAutocomplete)
 ```
 
 **⚠️ You may have to setup your bundler to embed the css file in your page.**
@@ -81,7 +81,7 @@ Vue.use(VueElasticsearch)
 Use specific components:
 
 ```javascript
-Vue.component('test', VueElasticsearch.Test)
+Vue.component('vueElasticAutocomplete', VueElasticsearch.VueElasticAutocomplete)
 ```
 
 ## Source import
@@ -99,9 +99,9 @@ Use specific components:
 
 ```javascript
 import Vue from 'vue'
-import { Test } from 'vue-elasticsearch/src'
+import { VueElasticAutocomplete } from 'vue-elasticsearch/src'
 
-Vue.component('test', Test)
+Vue.component('vueElasticAutocomplete', VueElasticAutocomplete)
 ```
 
 **⚠️ You need to configure your bundler to compile `.vue` files.** More info [in the official documentation](https://vuejs.org/v2/guide/single-file-components.html).
