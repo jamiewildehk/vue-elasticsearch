@@ -7,7 +7,7 @@ const state = {
   fetching: false,
   total: 0,
   hits: [],
-  error: null
+  error: null,
 }
 
 // getters
@@ -16,7 +16,7 @@ const getters = {
   fetching: state => state.fetching,
   total: state => state.total,
   hits: state => state.hits,
-  error: state => state.error
+  error: state => state.error,
 }
 
 // mutations
@@ -37,7 +37,7 @@ const mutations = {
   [types.SEARCH_FAILURE] (state, { error }) {
     state.fetching = false
     state.error = error
-  }
+  },
 }
 
 // actions
@@ -53,7 +53,7 @@ const actions = {
       .catch(error => {
         commit(types.SEARCH_FAILURE, { error })
       })
-  }
+  },
 }
 
 export default {
@@ -61,5 +61,5 @@ export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
 }

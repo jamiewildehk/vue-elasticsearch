@@ -5,5 +5,5 @@ const SearchManager = new ElasticManager()
 
 export {
   SuggestManager,
-  SearchManager
+  SearchManager,
 }

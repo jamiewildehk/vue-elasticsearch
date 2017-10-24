@@ -1,5 +1,3 @@
-import 'font-awesome/css/font-awesome.css'
-
 import { SuggestManager, SearchManager } from './api'
 import VueElasticStore from './store'
 import VueElasticAutocomplete from './components/VueElasticAutocomplete.vue'
@@ -10,12 +8,14 @@ export function install (Vue, { suggest, search }) {
   SearchManager.configure(search)
 
   Vue.component('vueElasticAutocomplete', VueElasticAutocomplete)
+  /* -- Add more components here -- */
 }
 
-// Expose the store and components
+// Expose the components
 export {
   VueElasticStore,
-  VueElasticAutocomplete
+  VueElasticAutocomplete,
+  /* -- Add more components here -- */
 }
 
 /* -- Plugin definition & Auto-install -- */
@@ -23,7 +23,9 @@ export {
 
 // Plugin
 const plugin = {
-  install
+  /* eslint-disable no-undef */
+  version: VERSION,
+  install,
 }
 
 export default plugin
