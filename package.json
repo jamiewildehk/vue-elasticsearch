@@ -1,7 +1,7 @@
 {
   "name": "vue-elasticsearch",
   "description": "An Elasticsearch wrapper for vue.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "authors": [
     {
       "name": "Haohong Xu",
@@ -38,7 +38,6 @@
   },
   "homepage": "https://github.com/jamiewildehk/vue-elasticsearch#readme",
   "devDependencies": {
-    "vue" : "^2.5.0",
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.0.0",
@@ -62,6 +61,7 @@
   },
   "dependencies": {
     "elasticsearch": "^13.3.1",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "vue": "^2.5.0"
   }
 }
