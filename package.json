@@ -38,6 +38,7 @@
   },
   "homepage": "https://github.com/jamiewildehk/vue-elasticsearch#readme",
   "devDependencies": {
+    "vue" : "^2.5.0",
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.0.0",
