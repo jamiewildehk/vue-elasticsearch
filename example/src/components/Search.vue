@@ -1,5 +1,5 @@
 <template>
-  <div class="example">
+  <div class="search">
 
     <img src="../assets/it2g.png" alt="miro" class="miroImg">
     <h1>Add Visual Search to Your App or Project in <u>Minutes</u></h1>
@@ -31,10 +31,10 @@
 
 <script>
 export default {
-  name: 'Example',
+  name: 'Search',
   data () {
     return {
-      msg: 'Example View'
+      msg: 'Search View'
     }
   },
   computed: {
