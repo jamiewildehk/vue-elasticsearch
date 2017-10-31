@@ -5,6 +5,8 @@ export class ElasticManager {
     this.client = null
     this.index = ''
     this.type = ''
+
+    this.perPage = 100
   }
 
   configure ({ host, index, type }) {
@@ -55,12 +57,14 @@ export class ElasticManager {
         index: this.index,
         type: this.type,
         body: {
-          size: 100,
+          size: this.perPage,
           query: {
             terms: { keywords: [keyword] },
           },
         },
       })
-      .then(response => response.hits)
+      .then(response => {
+        return response.hits
+      })
   }
 }
