@@ -1,9 +1,20 @@
 <template>
   <div class="result">
 
-    <router-link :to="{ name: 'Example' }">Back</router-link>
+    <vue-elastic-result-box
+      :keyword="keyword"
+      :result="result">
 
-    <h1>Result for {{ $route.params.keyword }}</h1>
+      <template slot="result-header" slot-scope="{ keyword, result }">
+        <router-link :to="{ name: 'Search' }">Back</router-link>
+        <h1>Result for {{ keyword }}</h1>
+        <h2>{{ result.total }} photos</h2>
+      </template>
+
+      <template slot="result-content" slot-scope="{ keyword, result }">
+        <h1>Result box</h1>
+      </template>
+    </vue-elastic-result-box>
 
   </div>
 </template>
@@ -15,6 +26,20 @@ export default {
     return {
       msg: 'Result View'
     }
+  },
+  computed: {
+    keyword () {
+      return this.$route.params.keyword
+    },
+    result () {
+      return {
+        total: this.$store.getters['elastic/search/total'],
+        hits: this.$store.getters['elastic/search/hits']
+      }
+    }
+  },
+  created () {
+    this.$store.dispatch('elastic/search/fetchHits', this.keyword)
   }
 }
 </script>
