@@ -39,7 +39,12 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('elastic/search/fetchHits', this.keyword)
+    this.$store.dispatch('elastic/search/fetchHits', {
+      keyword: this.keyword,
+      options: {
+        _source: 'resource_id'
+      }
+    })
   }
 }
 </script>

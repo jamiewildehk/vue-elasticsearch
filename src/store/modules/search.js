@@ -43,11 +43,11 @@ const mutations = {
 
 // actions
 const actions = {
-  fetchHits ({ commit, state }, keyword) {
+  fetchHits ({ commit, state }, { keyword, options }) {
     commit(types.UPDATE_KEYWORD, { keyword })
     commit(types.SEARCH_REQUEST)
 
-    SearchManager.search(keyword)
+    SearchManager.search(keyword, options)
       .then(response => {
         commit(types.SEARCH_SUCCESS, response)
       })

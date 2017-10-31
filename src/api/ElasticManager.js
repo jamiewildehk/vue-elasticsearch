@@ -47,9 +47,13 @@ export class ElasticManager {
       )
   }
 
-  search (keyword) {
+  search (keyword, options = {}) {
     if (!this.client) {
       return Promise.reject(new Error('Search client is not configured'))
+    }
+
+    const defaultOptions = {
+      _source: true,
     }
 
     return this.client
@@ -62,6 +66,7 @@ export class ElasticManager {
             terms: { keywords: [keyword] },
           },
         },
+        ...{ ...defaultOptions, ...options },
       })
       .then(response => {
         return response.hits
