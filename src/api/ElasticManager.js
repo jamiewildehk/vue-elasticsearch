@@ -52,13 +52,12 @@ export class ElasticManager {
 
     return this.client
       .search({
-        size: 100,
-        query: {
-          bool: {
-            must: [
-              { type: { value: this.type } },
-              { term: { keywords: keyword } },
-            ],
+        index: this.index,
+        type: this.type,
+        body: {
+          size: 100,
+          query: {
+            terms: { keywords: [keyword] },
           },
         },
       })
