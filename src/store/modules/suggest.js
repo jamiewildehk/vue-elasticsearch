@@ -30,8 +30,8 @@ const mutations = {
   },
 
   [types.SUGGEST_SUCCESS] (state, { suggestions }) {
-    state.suggestions = suggestions
     state.fetching = false
+    state.suggestions = suggestions
   },
 
   [types.SUGGEST_FAILURE] (state, { error }) {

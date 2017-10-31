@@ -62,6 +62,6 @@ export class ElasticManager {
           },
         },
       })
-      .then(response => response.hits.hits)
+      .then(response => response.hits)
   }
 }

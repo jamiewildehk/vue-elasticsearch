@@ -29,9 +29,10 @@ const mutations = {
     state.fetching = true
   },
 
-  [types.SEARCH_SUCCESS] (state, { response }) {
-    // TODO: Parse response
+  [types.SEARCH_SUCCESS] (state, { hits, total }) {
     state.fetching = false
+    state.total = total
+    state.hits = hits
   },
 
   [types.SEARCH_FAILURE] (state, { error }) {
@@ -47,8 +48,8 @@ const actions = {
     commit(types.SEARCH_REQUEST)
 
     SearchManager.search(keyword)
-      .then(hits => {
-        commit(types.SEARCH_SUCCESS, { hits })
+      .then(response => {
+        commit(types.SEARCH_SUCCESS, response)
       })
       .catch(error => {
         commit(types.SEARCH_FAILURE, { error })
