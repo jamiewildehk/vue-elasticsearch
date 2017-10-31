@@ -47,7 +47,7 @@ export default {
       this.$store.dispatch('elastic/suggest/fetchSuggestions', value)
     },
     onSelect (keyword) {
-      console.log('keyword', keyword)
+      this.$router.push({name: 'Result', params: { keyword }})
     }
   }
 }

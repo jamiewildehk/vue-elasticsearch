@@ -1,6 +1,8 @@
 <template>
   <div class="result">
 
+    <router-link :to="{ name: 'Example' }">Back</router-link>
+
     <h1>Result for {{ $route.params.keyword }}</h1>
 
   </div>
