@@ -1,7 +1,5 @@
 <template>
   <div class="result">
-    {{ query }}
-
     <vue-elastic-result-box
       :keyword="keyword"
       :result="result">
@@ -16,14 +14,29 @@
             <h1>Result for {{ keyword }}</h1>
           </div>
 
-          <div class="result-total">
-            <h3>{{ result.total }} photos</h3>
+          <div class="result-count">
+            <h3>{{ result.hits.length }} / {{ result.total }} loaded</h3>
           </div>
         </div>
       </template>
 
       <template slot="result-content" slot-scope="{ keyword, result }">
-        <h1>Result box</h1>
+        <div class="result-content">
+          <code class="result-query">{{ result.query }}</code>
+
+          <b-container class="result-hits">
+            <b-row>
+              <b-col cols="*" sm="6" md="3" lg="2"
+                v-for="(hit, key) in result.hits"
+                :key="key"
+                class="result-hit-item">
+                <img :src="`https://demoimg.miro.io/120_${hit._source.resource_id}.jpg`" alt="" class="result-hit-thumb">
+              </b-col>
+            </b-row>
+          </b-container>
+
+          <b-button v-if="result.hasNext" @click="loadMore()" variant="link">Load More</b-button>
+        </div>
       </template>
     </vue-elastic-result-box>
 
@@ -74,7 +87,7 @@ export default {
         }
       })
     },
-    onNext () {
+    loadMore () {
       this.$store.dispatch('elastic/search/fetchHits', {
         reset: false,
         options: {
@@ -99,6 +112,33 @@ export default {
 
     .result-title {
       flex: 1 1 auto;
+    }
+  }
+
+  .result-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .result-query {
+      display: block;
+      width: 600px;
+      border: 1px solid;
+      margin: 0 auto;
+    }
+
+    .result-hits {
+      margin: 20px 0;
+
+      .result-hit-item {
+        padding: 0;
+
+        img.result-hit-thumb {
+          width: 100%;
+          height: auto;
+          min-height: 190px;
+        }
+      }
     }
   }
 </style>
