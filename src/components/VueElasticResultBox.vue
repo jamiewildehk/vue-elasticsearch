@@ -15,7 +15,7 @@ export default {
     },
     fetching: {
       type: Boolean,
-      default: false
+      default: false,
     },
     result: {
       type: Object,
