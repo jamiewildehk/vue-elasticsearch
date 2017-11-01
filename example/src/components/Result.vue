@@ -38,7 +38,8 @@
               <b-col cols="*" sm="6" md="3" lg="2"
                 v-for="(hit, key) in result.hits"
                 :key="key"
-                class="result-hit-item">
+                class="result-hit-item"
+                @click="onHitClick(hit)">
                 <img :src="`https://demoimg.miro.io/120_${hit._source.resource_id}.jpg`" alt="" class="result-hit-thumb">
               </b-col>
             </b-row>
@@ -103,6 +104,9 @@ export default {
           _source: 'resource_id'
         }
       })
+    },
+    onHitClick (hit) {
+      console.log('onHitClick', hit)
     }
   },
   created () {
