@@ -1,14 +1,19 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import 'font-awesome/css/font-awesome.css'
+import BootstrapVue from 'bootstrap-vue'
 import VueElastic from 'vue-elasticsearch'
+
+import 'font-awesome/css/font-awesome.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-elasticsearch/dist/vue-elasticsearch.css'
 
 import store from './store'
 import App from './App'
 import router from './router'
 
+Vue.use(BootstrapVue)
 Vue.use(VueElastic, {
   suggest: {
     host: 'https://search-eschr-tyiqhwx3brb5tglcxbocehuvda.eu-west-1.es.amazonaws.com',
