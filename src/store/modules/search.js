@@ -6,7 +6,6 @@ const state = {
   keyword: '',
   fetching: false,
   total: 0,
-  page: 1,
   pageSize: 10,
   hasNext: true,
   hits: [],
@@ -19,7 +18,7 @@ const getters = {
   keyword: state => state.keyword,
   fetching: state => state.fetching,
   total: state => state.total,
-  page: state => state.page,
+  page: state => Math.floor(state.hits.length / state.pageSize) + 1,
   pageSize: state => state.pageSize,
   hasNext: state => state.hasNext,
   hits: state => state.hits,
@@ -32,7 +31,6 @@ const mutations = {
   [types.RESET_HITS] (state) {
     state.query = {}
     state.total = 0
-    state.page = 1
     state.hasNext = true
     state.hits = []
   },
@@ -52,7 +50,6 @@ const mutations = {
 
     if (response.hits.length > 0) {
       state.hits = state.hits.concat(response.hits)
-      state.page += 1
       state.hasNext = response.hits.length === state.pageSize
     }
   },
