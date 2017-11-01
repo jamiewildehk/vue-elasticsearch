@@ -6,6 +6,9 @@ const state = {
   keyword: '',
   fetching: false,
   total: 0,
+  page: 1,
+  pageSize: 10,
+  hasNext: true,
   hits: [],
   query: {},
   error: null,
@@ -16,6 +19,9 @@ const getters = {
   keyword: state => state.keyword,
   fetching: state => state.fetching,
   total: state => state.total,
+  page: state => state.page,
+  pageSize: state => state.pageSize,
+  hasNext: state => state.hasNext,
   hits: state => state.hits,
   query: state => state.query,
   error: state => state.error,
@@ -23,6 +29,14 @@ const getters = {
 
 // mutations
 const mutations = {
+  [types.RESET_HITS] (state) {
+    state.query = {}
+    state.total = 0
+    state.page = 1
+    state.hasNext = true
+    state.hits = []
+  },
+
   [types.UPDATE_KEYWORD] (state, { keyword }) {
     state.keyword = keyword
   },
@@ -35,7 +49,12 @@ const mutations = {
     state.fetching = false
     state.query = query
     state.total = response.total
-    state.hits = response.hits
+
+    if (response.hits.length > 0) {
+      state.hits = state.hits.concat(response.hits)
+      state.page += 1
+      state.hasNext = response.hits.length === state.pageSize
+    }
   },
 
   [types.SEARCH_FAILURE] (state, { error }) {
@@ -46,11 +65,29 @@ const mutations = {
 
 // actions
 const actions = {
-  fetchHits ({ commit, state }, { keyword, options }) {
+  updateKeyword ({ commit }, { keyword }) {
     commit(types.UPDATE_KEYWORD, { keyword })
-    commit(types.SEARCH_REQUEST)
+    commit(types.RESET_HITS)
+  },
 
-    SearchManager.search(keyword, options)
+  fetchHits ({ commit, state }, { reset, options }) {
+    if (reset) {
+      commit(types.RESET_HITS)
+    }
+
+    if (!state.hasNext) {
+      return
+    }
+
+    const from = state.hits.length
+    const size = state.pageSize
+
+    commit(types.SEARCH_REQUEST)
+    SearchManager.search(state.keyword, {
+      ...options,
+      from,
+      size,
+    })
       .then(({ query, response }) => {
         commit(types.SEARCH_SUCCESS, { query, response })
       })

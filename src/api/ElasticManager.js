@@ -5,8 +5,6 @@ export class ElasticManager {
     this.client = null
     this.index = ''
     this.type = ''
-
-    this.perPage = 100
   }
 
   configure ({ host, index, type }) {
@@ -53,6 +51,8 @@ export class ElasticManager {
     }
 
     const defaultOptions = {
+      from: 0,
+      size: 10,
       _source: true,
     }
     const searchOptions = { ...defaultOptions, ...options }
@@ -60,7 +60,6 @@ export class ElasticManager {
       index: this.index,
       type: this.type,
       body: {
-        size: this.perPage,
         query: {
           terms: { keywords: [keyword] },
         },
