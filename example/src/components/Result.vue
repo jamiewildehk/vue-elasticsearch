@@ -7,10 +7,19 @@
       :result="result">
 
       <template slot="result-header" slot-scope="{ keyword, result }">
-        <router-link :to="{ name: 'Search' }">Back</router-link>
-        <h1>Result for {{ keyword }}</h1>
-        <h2>{{ result.total }} photos</h2>
-        <button @click="onNext()">Next</button>
+        <div class="result-header">
+          <div class="back-link">
+            <router-link :to="{ name: 'Search' }"><i class="fa fa-chevron-left fa-2x" /></router-link>
+          </div>
+
+          <div class="result-title">
+            <h1>Result for {{ keyword }}</h1>
+          </div>
+
+          <div class="result-total">
+            <h3>{{ result.total }} photos</h3>
+          </div>
+        </div>
       </template>
 
       <template slot="result-content" slot-scope="{ keyword, result }">
@@ -36,12 +45,10 @@ export default {
     fetching () {
       return this.$store.getters['elastic/search/fetching']
     },
-    query () {
-      // Returns the last query used for search
-      return this.$store.getters['elastic/search/query']
-    },
     result () {
+      // Returns the search result
       return {
+        query: this.$store.getters['elastic/search/query'],
         total: this.$store.getters['elastic/search/total'],
         page: this.$store.getters['elastic/search/page'],
         pageSize: this.$store.getters['elastic/search/pageSize'],
@@ -84,6 +91,14 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
+  .result-header {
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
 
+    .result-title {
+      flex: 1 1 auto;
+    }
+  }
 </style>
