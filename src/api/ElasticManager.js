@@ -55,21 +55,26 @@ export class ElasticManager {
     const defaultOptions = {
       _source: true,
     }
+    const searchOptions = { ...defaultOptions, ...options }
+    const query = {
+      index: this.index,
+      type: this.type,
+      body: {
+        size: this.perPage,
+        query: {
+          terms: { keywords: [keyword] },
+        },
+      },
+      ...searchOptions,
+    }
 
     return this.client
-      .search({
-        index: this.index,
-        type: this.type,
-        body: {
-          size: this.perPage,
-          query: {
-            terms: { keywords: [keyword] },
-          },
-        },
-        ...{ ...defaultOptions, ...options },
-      })
+      .search(query)
       .then(response => {
-        return response.hits
+        return {
+          query,
+          response: response.hits,
+        }
       })
   }
 }

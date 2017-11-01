@@ -7,6 +7,7 @@ const state = {
   fetching: false,
   total: 0,
   hits: [],
+  query: {},
   error: null,
 }
 
@@ -16,6 +17,7 @@ const getters = {
   fetching: state => state.fetching,
   total: state => state.total,
   hits: state => state.hits,
+  query: state => state.query,
   error: state => state.error,
 }
 
@@ -29,10 +31,11 @@ const mutations = {
     state.fetching = true
   },
 
-  [types.SEARCH_SUCCESS] (state, { hits, total }) {
+  [types.SEARCH_SUCCESS] (state, { query, response }) {
     state.fetching = false
-    state.total = total
-    state.hits = hits
+    state.query = query
+    state.total = response.total
+    state.hits = response.hits
   },
 
   [types.SEARCH_FAILURE] (state, { error }) {
@@ -48,8 +51,8 @@ const actions = {
     commit(types.SEARCH_REQUEST)
 
     SearchManager.search(keyword, options)
-      .then(response => {
-        commit(types.SEARCH_SUCCESS, response)
+      .then(({ query, response }) => {
+        commit(types.SEARCH_SUCCESS, { query, response })
       })
       .catch(error => {
         commit(types.SEARCH_FAILURE, { error })
