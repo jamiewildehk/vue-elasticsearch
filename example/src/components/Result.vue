@@ -2,9 +2,10 @@
   <div class="result">
     <vue-elastic-result-box
       :keyword="keyword"
+      :fetching="fetching"
       :result="result">
 
-      <template slot="result-header" slot-scope="{ keyword, result }">
+      <template slot="result-header" slot-scope="{ keyword, fetching, result }">
         <div class="result-header">
           <div class="back-link">
             <router-link :to="{ name: 'Search' }"><i class="fa fa-chevron-left fa-2x" /></router-link>
@@ -20,8 +21,16 @@
         </div>
       </template>
 
-      <template slot="result-content" slot-scope="{ keyword, result }">
+      <template slot="result-content" slot-scope="{ keyword, fetching, result }">
         <div class="result-content">
+
+          <div class="loading" v-show="fetching">
+            <div>
+              <i class="fa fa-spinner fa-pulse fa-4x fa-fw"></i>
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+
           <code class="result-query">{{ result.query }}</code>
 
           <b-container class="result-hits">
@@ -119,6 +128,20 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+
+    .loading {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
 
     .result-query {
       display: block;

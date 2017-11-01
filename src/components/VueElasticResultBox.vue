@@ -1,7 +1,7 @@
 <template>
   <div class="ve-result-box">
-    <slot name="result-header" :keyword="keyword" :result="result"></slot>
-    <slot name="result-content" :keyword="keyword" :result="result"></slot>
+    <slot name="result-header" :keyword="keyword" :fetching="fetching" :result="result"></slot>
+    <slot name="result-content" :keyword="keyword" :fetching="fetching" :result="result"></slot>
   </div>
 </template>
 
@@ -12,6 +12,10 @@ export default {
     keyword: {
       type: String,
       default: '',
+    },
+    fetching: {
+      type: Boolean,
+      default: false
     },
     result: {
       type: Object,
