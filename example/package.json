@@ -1,7 +1,7 @@
 {
-  "name": "vue-elasticsearch",
+  "name": "vue-elasticsearch-demo",
   "version": "1.0.0",
-  "description": "An Elasticsearch wrapper for vue.js",
+  "description": "Demo for vue-elasticsearch npm lib",
   "author": "Haohong Xu <weidai1122@gmail.com>",
   "private": true,
   "scripts": {
@@ -18,6 +18,7 @@
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "vue": "^2.5.2",
+    "vue-elasticsearch": "latest",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.0"
   },
@@ -81,7 +82,6 @@
     "sinon": "^4.0.0",
     "sinon-chai": "^2.8.0",
     "url-loader": "^0.5.8",
-    "vue-elasticsearch": "latest",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
