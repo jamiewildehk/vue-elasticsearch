@@ -59,6 +59,9 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+import { MutationTypes } from 'vue-elasticsearch'
+
 export default {
   name: 'Result',
   data () {
@@ -90,31 +93,18 @@ export default {
     }
   },
   methods: {
-    updateKeyword () {
-      this.$store.dispatch('elastic/search/updateKeyword', {
-        keyword: this.keyword
-      })
-    },
+    ...mapMutations({
+      resetHits: `elastic/search/${MutationTypes.RESET_HITS}`,
+      updateKeyword: `elastic/search/${MutationTypes.UPDATE_KEYWORD}`,
+      updatePageSize: `elastic/search/${MutationTypes.UPDATE_PAGE_SIZE}`,
+      updateQueryType: `elastic/search/${MutationTypes.UPDATE_QUERY_TYPE}`,
+      updateQueryAggs: `elastic/search/${MutationTypes.UPDATE_QUERY_AGGS}`
+    }),
     search () {
       this.$store.dispatch('elastic/search/fetchHits', {
         reset: true,
         options: {
-          queryType: 'match',
-          _source: 'resource_id',
-          aggregations: {
-            places: {
-              terms: {
-                field: 'places',
-                size: 0
-              }
-            },
-            keywords: {
-              terms: {
-                field: 'keywords',
-                size: 0
-              }
-            }
-          }
+          _source: 'resource_id'
         }
       })
     },
@@ -131,7 +121,26 @@ export default {
     }
   },
   created () {
-    this.updateKeyword()
+    this.resetHits()
+
+    this.updateKeyword(this.keyword)
+    this.updatePageSize(10)
+    this.updateQueryType('match')
+    this.updateQueryAggs({
+      places: {
+        terms: {
+          field: 'places',
+          size: 0
+        }
+      },
+      keywords: {
+        terms: {
+          field: 'keywords',
+          size: 0
+        }
+      }
+    })
+
     this.search()
   }
 }
