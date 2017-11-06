@@ -19,6 +19,8 @@ const state = {
 // getters
 const getters = {
   keyword: state => state.keyword,
+  queryType: state => state.queryType,
+  queryAggs: state => state.queryAggs,
   fetching: state => state.fetching,
   total: state => state.total,
   page: state => Math.floor(state.hits.length / state.pageSize) + 1,
