@@ -54,21 +54,30 @@ export class ElasticManager {
       from: 0,
       size: 10,
       _source: true,
+      queryType: 'terms',
     }
     const searchOptions = { ...defaultOptions, ...options }
-    const query = {
+
+    let query = {}
+    if (searchOptions.queryType === 'terms') {
+      query.terms = { keywords: [keyword] }
+    } else if (searchOptions.queryType === 'match') {
+      query.match = { keywords: keyword }
+    }
+
+    const params = {
       index: this.index,
       type: this.type,
       body: {
-        query: {
-          terms: { keywords: [keyword] },
-        },
+        query,
+        _source: searchOptions._source,
       },
-      ...searchOptions,
+      from: searchOptions.from,
+      size: searchOptions.size,
     }
 
     return this.client
-      .search(query)
+      .search(params)
       .then(response => {
         return {
           query,

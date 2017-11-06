@@ -93,6 +93,7 @@ export default {
       this.$store.dispatch('elastic/search/fetchHits', {
         reset: true,
         options: {
+          queryType: 'match',
           _source: 'resource_id'
         }
       })
