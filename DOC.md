@@ -144,3 +144,73 @@ This is the dummy component
   </template>
 </vue-elastic-result-box>
 ```
+
+## Store
+
+### suggestion module
+
+This store provides the function that perform keyword suggestions.
+
+#### Getters
+
+| Attribute   | Description                                          | Type    |
+|-------------|------------------------------------------------------|---------|
+| query       | Query string that the user entered for auto-complete | String  |
+| fetching    | Indicates the fetching status                        | Boolean |
+| total       | Total number of suggestions                          | Number  |
+| suggestions | Suggestions fetched                                  | Array   |
+| error       | Error                                                | Object  |
+
+
+#### Mutations
+
+| Type            | Description                                   | Params             |
+|-----------------|-----------------------------------------------|--------------------|
+| UPDATE_QUERY    | Update suggestion query string                | query: String      |
+| SUGGEST_REQUEST | Mark the start of suggestions search          | -                  |
+| SUGGEST_SUCCESS | Mark the success of suggestions search        | suggestions: Array |
+| SUGGEST_ERROR   | Mark the error happened in suggestions search | error: Object      |
+
+#### Actions
+
+| Method           | Description       | Params        |
+|------------------|-------------------|---------------|
+| fetchSuggestions | Start search      | query: String |
+
+### search module
+
+#### Getters
+
+| Attribute | Description                                  | Type    |
+|-----------|----------------------------------------------|---------|
+| keyword   | Keyword to search with                       | String  |
+| queryType | 'match' or 'terms'                           | String  |
+| queryAggs | Aggregates query                             | Object  |
+| fetching  | Indicates the fetching status                | Boolean |
+| total     | Total number of suggestions                  | Number  |
+| page      | Page number                                  | Number  |
+| pageSize  | Page size                                    | Number  |
+| hasNext   | If TRUE, has more records to fetch           | Boolean |
+| hits      | Records fetched                              | Array   |
+| aggs      | Aggregates result                            | Object  |
+| query     | Query body. It's added for debugging purpose | Object  |
+| error     | Error                                        | Object  |
+
+#### Mutations
+
+| Type              | Description                               | Params                              |
+|-------------------|-------------------------------------------|-------------------------------------|
+| RESET_HITS        | Reset search results                      | -                                   |
+| UPDATE_KEYWORD    | Update search keyword string              | keyword: String                     |
+| UPDATE_PAGE_SIZE  | Update the page size option               | pageSize: Number                    |
+| UPDATE_QUERY_TYPE | Update query type                         | queryType: 'match' or 'terms'       |
+| UPDATE_QUERY_AGGS | Update aggregates query                   | queryAggs: Object                   |
+| SEARCH_REQUEST    | Mark the start of search request          | -                                   |
+| SEARCH_SUCCESS    | Mark the success of search request        | { query: Object, response: Object } |
+| SEARCH_FAILURE    | Mark the error happened in search request | error: Object                       |
+
+#### Actions
+
+| Method    | Description                                                                                                                                                                       | Params                             |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------|
+| fetchHits | Start search. Send reset flag as TRUE if you want to clear the previous search result. Otherwise it concats the result. You can also set options like `_source` in options param. | { reset: Boolean, options: Object} |

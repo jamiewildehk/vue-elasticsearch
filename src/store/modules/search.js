@@ -76,7 +76,7 @@ const mutations = {
     state.aggs = response.aggregations
   },
 
-  [types.SEARCH_FAILURE] (state, { error }) {
+  [types.SEARCH_FAILURE] (state, error) {
     state.fetching = false
     state.error = error
   },
@@ -106,7 +106,7 @@ const actions = {
         commit(types.SEARCH_SUCCESS, { query, response })
       })
       .catch(error => {
-        commit(types.SEARCH_FAILURE, { error })
+        commit(types.SEARCH_FAILURE, error)
       })
   },
 }
