@@ -94,7 +94,21 @@ export default {
         reset: true,
         options: {
           queryType: 'match',
-          _source: 'resource_id'
+          _source: 'resource_id',
+          aggregations: {
+            places: {
+              terms: {
+                field: 'places',
+                size: 0
+              }
+            },
+            keywords: {
+              terms: {
+                field: 'keywords',
+                size: 0
+              }
+            }
+          }
         }
       })
     },

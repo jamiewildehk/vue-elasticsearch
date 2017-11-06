@@ -71,6 +71,7 @@ export class ElasticManager {
       body: {
         query,
         _source: searchOptions._source,
+        aggs: searchOptions.aggs || searchOptions.aggregations,
       },
       from: searchOptions.from,
       size: searchOptions.size,
