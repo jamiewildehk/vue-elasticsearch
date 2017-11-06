@@ -4,6 +4,8 @@ import { SearchManager } from '../../api'
 // initial state
 const state = {
   keyword: '',
+  queryType: 'terms',
+  queryAggs: null,
   fetching: false,
   total: 0,
   pageSize: 10,
@@ -31,6 +33,7 @@ const getters = {
 // mutations
 const mutations = {
   [types.RESET_HITS] (state) {
+    state.fetching = false
     state.query = {}
     state.total = 0
     state.hasNext = true
@@ -38,8 +41,20 @@ const mutations = {
     state.aggs = null
   },
 
-  [types.UPDATE_KEYWORD] (state, { keyword }) {
+  [types.UPDATE_KEYWORD] (state, keyword) {
     state.keyword = keyword
+  },
+
+  [types.UPDATE_PAGE_SIZE] (state, pageSize) {
+    state.pageSize = pageSize
+  },
+
+  [types.UPDATE_QUERY_TYPE] (state, queryType) {
+    state.queryType = queryType
+  },
+
+  [types.UPDATE_QUERY_AGGS] (state, queryAggs) {
+    state.queryAggs = queryAggs
   },
 
   [types.SEARCH_REQUEST] (state) {
@@ -67,11 +82,6 @@ const mutations = {
 
 // actions
 const actions = {
-  updateKeyword ({ commit }, { keyword }) {
-    commit(types.UPDATE_KEYWORD, { keyword })
-    commit(types.RESET_HITS)
-  },
-
   fetchHits ({ commit, state }, { reset, options }) {
     if (reset) {
       commit(types.RESET_HITS)
@@ -81,14 +91,14 @@ const actions = {
       return
     }
 
-    const from = state.hits.length
-    const size = state.pageSize
-
     commit(types.SEARCH_REQUEST)
+
     SearchManager.search(state.keyword, {
       ...options,
-      from,
-      size,
+      from: state.hits.length,
+      size: state.pageSize,
+      queryType: state.queryType,
+      queryAggs: state.queryAggs,
     })
       .then(({ query, response }) => {
         commit(types.SEARCH_SUCCESS, { query, response })
