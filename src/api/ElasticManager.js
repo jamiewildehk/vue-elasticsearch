@@ -81,8 +81,8 @@ export class ElasticManager {
       .search(params)
       .then(response => {
         return {
-          query,
-          response: response.hits,
+          query: params,
+          response,
         }
       })
   }

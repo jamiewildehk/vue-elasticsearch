@@ -9,6 +9,7 @@ const state = {
   pageSize: 10,
   hasNext: true,
   hits: [],
+  aggs: null,
   query: {},
   error: null,
 }
@@ -22,6 +23,7 @@ const getters = {
   pageSize: state => state.pageSize,
   hasNext: state => state.hasNext,
   hits: state => state.hits,
+  aggs: state => state.aggs,
   query: state => state.query,
   error: state => state.error,
 }
@@ -33,6 +35,7 @@ const mutations = {
     state.total = 0
     state.hasNext = true
     state.hits = []
+    state.aggs = null
   },
 
   [types.UPDATE_KEYWORD] (state, { keyword }) {
@@ -46,12 +49,14 @@ const mutations = {
   [types.SEARCH_SUCCESS] (state, { query, response }) {
     state.fetching = false
     state.query = query
-    state.total = response.total
+    state.total = response.hits.total
 
-    if (response.hits.length > 0) {
-      state.hits = state.hits.concat(response.hits)
-      state.hasNext = response.hits.length === state.pageSize
+    if (response.hits.hits.length > 0) {
+      state.hits = state.hits.concat(response.hits.hits)
+      state.hasNext = response.hits.hits.length === state.pageSize
     }
+
+    state.aggs = response.aggregations
   },
 
   [types.SEARCH_FAILURE] (state, { error }) {

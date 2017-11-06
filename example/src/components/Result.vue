@@ -33,6 +33,11 @@
 
           <code class="result-query">{{ result.query }}</code>
 
+          <div v-if="result.aggs">
+            <h4>Aggregations</h4>
+            <code>{{ result.aggs }}</code>
+          </div>
+
           <b-container class="result-hits">
             <b-row>
               <b-col cols="*" sm="6" md="3" lg="2"
@@ -76,7 +81,8 @@ export default {
         page: this.$store.getters['elastic/search/page'],
         pageSize: this.$store.getters['elastic/search/pageSize'],
         hasNext: this.$store.getters['elastic/search/hasNext'],
-        hits: this.$store.getters['elastic/search/hits']
+        hits: this.$store.getters['elastic/search/hits'],
+        aggs: this.$store.getters['elastic/search/aggs']
       }
     },
     error () {
