@@ -1,5 +1,6 @@
 import { SuggestManager, SearchManager } from './api'
 import VueElasticStore from './store'
+import * as MutationTypes from './store/mutation-types'
 import VueElasticAutocomplete from './components/VueElasticAutocomplete.vue'
 import VueElasticResultBox from './components/VueElasticResultBox.vue'
 
@@ -18,6 +19,7 @@ export {
   VueElasticStore,
   VueElasticAutocomplete,
   VueElasticResultBox,
+  MutationTypes,
   /* -- Add more components here -- */
 }
 
