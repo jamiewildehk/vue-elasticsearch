@@ -21,7 +21,7 @@ const getters = {
 
 // mutations
 const mutations = {
-  [types.UPDATE_QUERY] (state, { query }) {
+  [types.UPDATE_QUERY] (state, query) {
     state.query = query
   },
 
@@ -29,12 +29,12 @@ const mutations = {
     state.fetching = true
   },
 
-  [types.SUGGEST_SUCCESS] (state, { suggestions }) {
-    state.suggestions = suggestions
+  [types.SUGGEST_SUCCESS] (state, suggestions) {
     state.fetching = false
+    state.suggestions = suggestions
   },
 
-  [types.SUGGEST_FAILURE] (state, { error }) {
+  [types.SUGGEST_FAILURE] (state, error) {
     state.fetching = false
     state.error = error
   },
@@ -43,15 +43,15 @@ const mutations = {
 // actions
 const actions = {
   fetchSuggestions ({ commit, state }, query) {
-    commit(types.UPDATE_QUERY, { query })
+    commit(types.UPDATE_QUERY, query)
     commit(types.SUGGEST_REQUEST)
 
     SuggestManager.suggest(query)
       .then(suggestions => {
-        commit(types.SUGGEST_SUCCESS, { suggestions })
+        commit(types.SUGGEST_SUCCESS, suggestions)
       })
       .catch(error => {
-        commit(types.SUGGEST_FAILURE, { error })
+        commit(types.SUGGEST_FAILURE, error)
       })
   },
 }

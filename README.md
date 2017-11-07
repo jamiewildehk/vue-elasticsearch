@@ -82,6 +82,7 @@ Use specific components:
 
 ```javascript
 Vue.component('vueElasticAutocomplete', VueElasticsearch.VueElasticAutocomplete)
+Vue.component('vueElasticResultBox', VueElasticsearch.VueElasticResultBox)
 ```
 
 ## Source import
@@ -100,8 +101,10 @@ Use specific components:
 ```javascript
 import Vue from 'vue'
 import { VueElasticAutocomplete } from 'vue-elasticsearch/src'
+import { VueElasticResultBox } from 'vue-elasticsearch/src'
 
 Vue.component('vueElasticAutocomplete', VueElasticAutocomplete)
+Vue.component('vueElasticResultBox', VueElasticResultBox)
 ```
 
 **⚠️ You need to configure your bundler to compile `.vue` files.** More info [in the official documentation](https://vuejs.org/v2/guide/single-file-components.html).

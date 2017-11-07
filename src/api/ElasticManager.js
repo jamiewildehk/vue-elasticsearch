@@ -45,23 +45,45 @@ export class ElasticManager {
       )
   }
 
-  search (keyword) {
+  search (keyword, options = {}) {
     if (!this.client) {
       return Promise.reject(new Error('Search client is not configured'))
     }
 
+    const defaultOptions = {
+      from: 0,
+      size: 10,
+      _source: true,
+      queryType: 'terms',
+    }
+    const searchOptions = { ...defaultOptions, ...options }
+
+    let query = {}
+    if (searchOptions.queryType === 'terms') {
+      query.terms = { keywords: [keyword] }
+    } else if (searchOptions.queryType === 'match') {
+      query.match = { keywords: keyword }
+    }
+
+    const params = {
+      index: this.index,
+      type: this.type,
+      body: {
+        query,
+        _source: searchOptions._source,
+        aggs: searchOptions.queryAggs,
+      },
+      from: searchOptions.from,
+      size: searchOptions.size,
+    }
+
     return this.client
-      .search({
-        size: 100,
-        query: {
-          bool: {
-            must: [
-              { type: { value: this.type } },
-              { term: { keywords: keyword } },
-            ],
-          },
-        },
+      .search(params)
+      .then(response => {
+        return {
+          query: params,
+          response,
+        }
       })
-      .then(response => response.hits.hits)
   }
 }

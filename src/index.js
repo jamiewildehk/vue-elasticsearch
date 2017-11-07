@@ -1,6 +1,8 @@
 import { SuggestManager, SearchManager } from './api'
 import VueElasticStore from './store'
+import * as MutationTypes from './store/mutation-types'
 import VueElasticAutocomplete from './components/VueElasticAutocomplete.vue'
+import VueElasticResultBox from './components/VueElasticResultBox.vue'
 
 // Install the components
 export function install (Vue, { suggest, search }) {
@@ -8,6 +10,7 @@ export function install (Vue, { suggest, search }) {
   SearchManager.configure(search)
 
   Vue.component('vueElasticAutocomplete', VueElasticAutocomplete)
+  Vue.component('vueElasticResultBox', VueElasticResultBox)
   /* -- Add more components here -- */
 }
 
@@ -15,6 +18,8 @@ export function install (Vue, { suggest, search }) {
 export {
   VueElasticStore,
   VueElasticAutocomplete,
+  VueElasticResultBox,
+  MutationTypes,
   /* -- Add more components here -- */
 }
 
